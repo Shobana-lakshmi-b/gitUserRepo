@@ -1,0 +1,30 @@
+<div class="container" *ngIf="!isRepoLangLoading;else showLoader">
+  <div class="row justify-content-start">
+    <ng-container *ngFor="let repo of repos | slice: (page-1) * pageSize : page * pageSize">
+
+      <div class="col-md-5 mt-4 repo">
+        <div class="repoItem">
+          <a [href]="repo['repoLink']" target="_blank">{{repo['name']}}</a>
+        </div>
+
+        <div class="repoItem">
+          {{repo['description']}}
+        </div>
+
+        <div class="repoItem">
+          <ng-container *ngFor="let language of repo['languages']">
+            <span class="badge badge-success mr-1"> {{language}}</span>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+  <div *ngIf="repos.length" class="row mt-4 justify-content-center">
+    <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="repos.length" (pageChange)="loadPage($event)"></ngb-pagination>
+  </div>
+</div>
+
+<ng-template #showLoader>
+  <app-loader isContentLoading="true"></app-loader>
+</ng-template>

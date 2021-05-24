@@ -1,0 +1,35 @@
+<ng-container *ngIf="!isUserDetailsLoading;else showLoader">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+
+      <div class="col-md-4">
+        <img [src]="user.bioDetail.avatar_url" alt="">
+        <div class="userLink col-12">
+          <i class="fa fa-paperclip mr-1" aria-hidden="true"></i>
+          <a href="{{user.bioDetail['html_url']}}" target="_blank">{{user.bioDetail['html_url']}}</a>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="row">
+          <div class="name col-12 mb-2">{{user.bioDetail['name']}}</div>
+          <div class="col-12 mb-2">{{user.bioDetail['bio']}}</div>
+          <div *ngIf="user.bioDetail['location']" class="col-12 mb-2">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            {{user.bioDetail['location']}}
+          </div>
+          <div *ngIf="user.bioDetail['twitter_username']" class="col-12">
+            <strong>Twitter:</strong>
+            {{user.bioDetail['twitter_username']}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-list-repos [userRepos]="user.repos"></app-list-repos>
+  </div>
+</ng-container>
+
+<ng-template #showLoader>
+  <app-loader isHeaderLoading="true" isContentLoading="true"></app-loader>
+</ng-template>

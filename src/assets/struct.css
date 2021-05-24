@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+  font-family: "Arial,sans-serif";
+  font-size: 1rem;
+}
+
+a {
+   color: #0366d6;
+}
+
